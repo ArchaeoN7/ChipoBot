@@ -74,10 +74,11 @@ const handleChat = (req, res)=>
 }
 
 function sendQrCode(name, sender){
+
     sub2chip((fname, lname, newMail)=>{
         if(fname)
         {
-            getImg(0, false, "newMail", (link)=>{
+            getImg(0, false, newMail, (link)=>{
                 if(link!=null)
                 {
                     sendTextMessage(sender, fname + " "+lname+ " s'est enregistré chez Chipotle");
