@@ -16,7 +16,7 @@ var app = express();
 // Set template engine in Express
 app.set("view engine", "ejs");
 
-app.set('port', config.get("PORT"));
+app.set('port', process.env.PORT || config.get("PORT"));
 app.use(bodyParser.json());
 
 app.get('/webhook', function(req, res) {
