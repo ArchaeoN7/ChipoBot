@@ -1,0 +1,16 @@
+{
+    "errors": [
+        {
+            "log": "MAX_COUNT_LOOP was reached, last error: There are no emails yet",
+            "timestamp": "15/1/2020_17:26:21.227"
+        },
+        {
+            "log": "MAX_COUNT_LOOP was reached, last error: There are no emails yet",
+            "timestamp": "15/1/2020_17:26:52.611"
+        },
+        {
+            "log": "Couldn't get any domain from API TM",
+            "timestamp": "15/1/2020_17:49:34.937"
+        }
+    ]
+}
