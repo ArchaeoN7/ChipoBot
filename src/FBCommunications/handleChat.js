@@ -65,7 +65,10 @@ const handleChat = (req, res)=>
                     });
                 }   
                 else
-                    sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200))
+                {
+                    sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200)+"...");
+                    sendTextMessage(sender, "Pour recevoir un nouveau code, envoie '''J'ai faim''' ");
+                }
             }
             
         }
