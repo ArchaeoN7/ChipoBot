@@ -23,7 +23,7 @@ app.get('/webhook', function(req, res) {
     verifyWebhook(req, res);
 });
 
-app.post('/',  (req, res) => {
+app.post('/webhook/',  (req, res) => {
   handleChat(req, res);
 })
 app.get("/", function(req, res) {
