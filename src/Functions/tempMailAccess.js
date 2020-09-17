@@ -68,17 +68,15 @@ const randomDomain = (useRandom) =>{
 		else
 		{
 			try {
-				
-			
-			console.log(body)
-			body = JSON.parse(body);
-			if(body.length > 0)
-			{
-				const randomDomain = Math.floor(Math.random()*body.length);
-				useRandom(body[randomDomain], null);
-			}
-			else
-				useRandom(null, "Couldn't get any domain from API TM");
+				console.log(body)
+				body = JSON.parse(body);
+				if(body.length > 0)
+				{
+					const randomDomain = Math.floor(Math.random()*body.length);
+					useRandom(body[randomDomain], null);
+				}
+				else
+					useRandom(null, "Couldn't get any domain from API TM");
 			} catch (error) {
 				console.log(error);
 			}
