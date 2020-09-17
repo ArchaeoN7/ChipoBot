@@ -80,7 +80,7 @@ const randomDomain = (useRandom) =>{
 			else
 				useRandom(null, "Couldn't get any domain from API TM");
 			} catch (error) {
-				throw new Error(error);
+				print(error);
 			}
 		}
 });
