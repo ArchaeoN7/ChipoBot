@@ -1,0 +1,5 @@
+#personnal config file
+#config/default.json
+#npm
+node_modules/
+src/test.js

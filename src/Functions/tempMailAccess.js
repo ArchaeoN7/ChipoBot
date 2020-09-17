@@ -65,6 +65,7 @@ const randomDomain = (useRandom) =>{
 
 	request(options, function (error, response, body) {
 		if (error) throw new Error(error);
+		print(body)
 		body = JSON.parse(body);
 		if(body.length > 0)
 		{
