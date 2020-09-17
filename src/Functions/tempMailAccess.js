@@ -68,7 +68,7 @@ const randomDomain = (useRandom) =>{
 		else
 		{
 			try {
-				console.log(type(body))
+				console.log(typeof(body))
 				body = JSON.parse(body);
 				if(body.length > 0)
 				{
