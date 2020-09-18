@@ -20,30 +20,26 @@ const handleChat = (req, res)=>
 	message_events.forEach(message_event => {
 		let sender = message_event.sender.id
 		try {
-				if(message_event.postback)
+				if(message_event.postback && message_event.postback.payload)
 				{
-					if(message_event.postback.payload)
-					{
-						if (message_event.postback.payload == "GET_STARTED")
-							sendQuickReplies(sender, "Hello jeune affamé ! Que puis-je faire pour toi ?","J'ai faim", "J'ai très faim")
-						else if(message_event.postback.payload == "J'ai faim")
-							{
-								const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
-								var options = {
-									method: "GET",
-									url:url
-								};
-								request(options, function(error, response, body) {
-									if (error) throw new Error(error);
-									const name = JSON.parse(body).first_name;
-									sendQrCode(name, sender);
-								});
-							}
+					if (message_event.postback.payload == "GET_STARTED")
+						sendQuickReplies(sender, "Hello jeune affamé ! Que puis-je faire pour toi ?","J'ai faim", "J'ai très faim")
+					else if(message_event.postback.payload == "J'ai faim")
+						{
+							const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
+							var options = {
+								method: "GET",
+								url:url
+							};
+							request(options, function(error, response, body) {
+								if (error) throw new Error(error);
+								const name = JSON.parse(body).first_name;
+								sendQrCode(name, sender);
+							});
 						}
 
 				}
 				else if (message_event.message) {
-					console.log(config.get('APP_NAME'))
 					sendTextMessage(sender, "new " + config.get('APP_NAME') + " au rapport! Ta demande est en cours de traitement")
 					if(message_event.message.quick_reply)
 					{
@@ -64,7 +60,7 @@ const handleChat = (req, res)=>
 					}
 					else if(message_event.message.text)
 					{
-
+						console.log(config.get('APP_NAME'))
 						let text = message_event.message.text
 						if(text == "rmenu")
 							persMenus.removePersistentMenu();
