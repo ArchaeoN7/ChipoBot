@@ -2,6 +2,11 @@ const config = require('config');
 const request = require('request');
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
+/**
+ * Send a text message back to the sender
+ * @param {object} sender
+ * @param {string} text
+ */
 const sendTextMessage = (sender, text) => {
     let data = { text:text }
     request({

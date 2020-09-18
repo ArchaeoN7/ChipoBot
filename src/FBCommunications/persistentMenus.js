@@ -3,6 +3,10 @@ const request = require('request');
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
 module.exports = {
+    /**
+     * Send a persistent menu with one option
+     * @param {object} sender
+     */
     addPersistentMenu(sender) {
         request({
             url: 'https://graph.facebook.com/v2.6/me/messenger_profile',
@@ -35,6 +39,9 @@ module.exports = {
 
     },
 
+    /**
+     * Remove a persistent menu
+     */
     removePersistentMenu() {
             request({
             url: 'https://graph.facebook.com/v2.6/me/thread_settings',

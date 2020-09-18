@@ -4,6 +4,10 @@ const fmParams = require("../../config/formDataParams");
 const crypto = require("crypto");
 const haiku = require('./haiku');
 
+/**
+ * Send a request to Chipotle to subscribe with a random mail
+ * @param {callback} goOn
+ */
 const sub2chip=(goOn)=>{
 
     const title = haiku();

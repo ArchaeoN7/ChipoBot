@@ -1,6 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Write error on a file log errorLog.json
+ * @param {string} errorLog
+ */
 const registerError = (errorLog)=>{
 
     var datetime = new Date();

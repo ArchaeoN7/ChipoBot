@@ -2,6 +2,12 @@ const config = require('config');
 const request = require('request');
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
+/**
+ * Send an image to the sender
+ * @param {object} sender
+ * @param {string} url
+ */
+
 const sendImageMessage = (sender, url) => {
     let data =
     {

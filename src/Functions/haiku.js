@@ -1,3 +1,8 @@
+/**
+ * Form a short poetic name
+ */
+
+
 const haiku = () => {
 	var adjs = [
 		"autumn",

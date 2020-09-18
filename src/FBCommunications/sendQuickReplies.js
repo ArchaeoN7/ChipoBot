@@ -2,6 +2,13 @@ const config = require('config');
 const request = require('request');
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
+/**
+ * Send a "quick reply" object, aka a list of 2 propositions
+ * @param {object} sender
+ * @param {string} title
+ * @param {string} proposition1
+ * @param {string} proposition2
+ */
 const sendQuickReplyMessage = (sender,  title, proposition1, proposition2) => {
 
     let data =

@@ -1,5 +1,9 @@
 const config = require('config');
-
+/**
+ * Verify webhook token
+ * @param {*} req
+ * @param {*} res
+ */
 const verifyWebhook = (req, res) => {
     // Your verify token. Should be a random string.
     let VERIFY_TOKEN = config.get('VERIFY_STRING');

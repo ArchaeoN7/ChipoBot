@@ -1,6 +1,13 @@
 const tmMail = require('./tempMailAccess');
 const registerError = require("./handleErrors");
 
+/**
+ * Get img in the mail in the tempmail box
+ * @param {*} count
+ * @param {*} dispInfos
+ * @param {string} email
+ * @param {callback} goOn
+ */
 const retrieveImg = (count, dispInfos, email, goOn)=>{
     tmMail.getmail(count, dispInfos, email, (mail, errorLog)=>{
         if(errorLog)
@@ -22,6 +29,10 @@ const retrieveImg = (count, dispInfos, email, goOn)=>{
 
 }
 
+/**
+ * find the qrcode image url in the html code of the mail
+ * @param {string} html
+ */
 function retrieveLink(html){
 
     var indexLink = html.indexOf("https://offermanager.fishbowl.com/OfferManagement/Handlers/BarcodeGenerator.ashx");

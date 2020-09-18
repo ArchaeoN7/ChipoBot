@@ -2,12 +2,23 @@ const crypto = require("crypto");
 var request = require("request");
 const config = require('config');
 
+/**
+ * hash email
+ * @param {string} email
+ */
 function md5HashMail(email) {
 	return crypto
 		.createHash("md5")
 		.update(email)
 		.digest("hex");
 }
+/**
+ * Send a Get request to collect Chipotle mail
+ * @param {*} count
+ * @param {*} dispInfos
+ * @param {string} email
+ * @param {callback} useMail
+ */
 const getMail = (count, dispInfos, email, useMail) => {
 	const url = "https://privatix-temp-mail-v1.p.rapidapi.com/request/mail/id/" + md5HashMail(email)+"/";
 	var options = {
@@ -44,14 +55,22 @@ const getMail = (count, dispInfos, email, useMail) => {
 
 	});
 }
-
+/**
+ * Display in console request informations
+ * @param {*} count
+ * @param {string} email
+ * @param {*} stuff
+ */
 function displayInfos(count, email, stuff) {
 
 	console.log("Count: " + count);
 	console.log("hash is: "+md5HashMail(email) + " for email: " + email);
 	console.log(JSON.parse(stuff).error);
 }
-// Get availables domain names and return a random one
+/**
+ * Get available domain names and return a random one
+ * @param {callbak} useRandom
+ */
 const randomDomain = (useRandom) =>{
 
 	var options = {
