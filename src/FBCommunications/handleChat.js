@@ -106,7 +106,6 @@ const handleChat = (req, res)=>
 				console.log('aie')
 		}
 	});
-    res.sendStatus(200)
 }
 
 /**
