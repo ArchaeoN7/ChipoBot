@@ -8,7 +8,7 @@ var request = require("request");
 const sub2chip = require('../Functions/sub2chipotle');
 const registerError = require("../Functions/handleErrors");
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
-
+const app_name = config.get('APP_NAME')
 /**
  * Parse facebook request to send an appropriate answer
  * @param {*} req
@@ -39,7 +39,7 @@ const handleChat = (req, res)=>
 
 		}
 		else if (message_event.message) {
-			sendTextMessage(sender, "new " + config.get('APP_NAME') + " au rapport! Ta demande est en cours de traitement")
+			sendTextMessage(sender, "new " + app_name + " au rapport! Ta demande est en cours de traitement")
 			if(message_event.message.quick_reply)
 			{
 				if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
@@ -59,7 +59,6 @@ const handleChat = (req, res)=>
 			}
 			else if(message_event.message.text)
 			{
-				console.log(config.get('APP_NAME'))
 				let text = message_event.message.text
 				if(text == "rmenu")
 					persMenus.removePersistentMenu();
@@ -78,7 +77,7 @@ const handleChat = (req, res)=>
 						sendQrCode(name, sender);
 					});
 				}else if(text == "help"){
-					text = "*MAN " + config.get('APP_NAME') + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
+					text = "*MAN " + app_name + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
 					"-  Pour recevoir un nouveau code, envoie: 𝙅'𝙖𝙞 𝙛𝙖𝙞𝙢, ou passe par le menu à gauche de ta zone de texte\n"+
 					"-  Si tu n'as pas de menu, envoie: ```menu```, il devrait apparaître au bout de quelques instants\n"+
 					"-  Si tu veux enlever ce menu, envoie: ```rmenu```\n" +
