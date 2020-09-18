@@ -19,7 +19,6 @@ const handleChat = (req, res)=>
 		let message_events = req.body.entry[0].messaging
     message_events.forEach(message_event => {
     let sender = message_event.sender.id
-	sendTextMessage(sender, "ChipoBot au rapport! Ta demande est en cours de traitement")
         if(message_event.postback)
         {
             if(message_event.postback.payload)
@@ -43,6 +42,7 @@ const handleChat = (req, res)=>
 
         }
         else if (message_event.message) {
+			sendTextMessage(sender, "ChipoBot au rapport! Ta demande est en cours de traitement")
             if(message_event.message.quick_reply)
             {
                 if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
