@@ -100,7 +100,7 @@ const handleChat = (req, res)=>
 			errorMessage(sender)
 		}
 	});
-
+	res.sendStatus( 200 )
 }
 
 /**
