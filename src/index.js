@@ -12,7 +12,7 @@ const verifyWebhook = require('./FBCommunications/verify-webhook');
 const handleChat = require('./FBCommunications/handleChat');
 const getMail = require('./Functions/tempMailAccess');
 var app = express();
- 
+
 // Set template engine in Express
 app.set("view engine", "ejs");
 

@@ -95,7 +95,7 @@ const handleChat = (req, res)=>
                 else
                 {
                     sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200)+"...");
-                    sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?! envoie : ```help``` pour le découvrir ;)");
+                    sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?! pour le découvrir, envoie : ```help``` ");
                 }
             }
         }
