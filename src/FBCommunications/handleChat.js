@@ -80,9 +80,10 @@ const handleChat = (req, res)=>
 						});
 					}else if(text == "help"){
 						text = "*MAN " + app_name + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
-						"-  Pour recevoir un nouveau code, envoie: 𝙅'𝙖𝙞 𝙛𝙖𝙞𝙢, ou passe par le menu à gauche de ta zone de texte\n"+
-						"-  Si tu n'as pas de menu, envoie: ```menu```, il devrait apparaître au bout de quelques instants\n"+
-						"-  Si tu veux enlever ce menu, envoie: ```rmenu```\n" +
+						"-  Pour recevoir un nouveau code, envoie: \n ```J'ai faim```\n ou passe par le menu à gauche de ta zone de texte\n"+
+						"-  Si tu n'as pas de menu, envoie:\n"+
+						"```menu```, il devrait apparaître au bout de quelques instants\n"+
+						"-  Si tu veux enlever ce menu, envoie:\n ```rmenu```\n" +
 						"-  D'autres questions? Demande à l'administrateur !\nhttps://www.facebook.com/messages/t/100045731290840\n" +
 						"-  Le code du bot est pour le moment privé car il contient des informations sensibles concernant l'authentifcation de la page\n"+
 						"=> Contacte l'administrateur si tu veux pouvoir en discuter avec lui !"+
@@ -98,6 +99,7 @@ const handleChat = (req, res)=>
 			}
 		} catch (error) {
 			errorMessage(sender)
+			console.log(error)
 		}
 	});
 	res.sendStatus( 200 )
