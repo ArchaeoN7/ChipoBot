@@ -103,7 +103,7 @@ const handleChat = (req, res)=>
 				}
 			} catch (error) {
 				errorMessage(sender)
-				console.log('aie')
+				console.log(error)
 		}
 	});
 }
