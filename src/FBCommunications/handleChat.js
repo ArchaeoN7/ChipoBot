@@ -100,7 +100,6 @@ const handleChat = (req, res)=>
 			} catch (error) {
 				errorMessage(sender)
 				console.log(error)
-				res.sendStatus(503)
 		}
 	});
 }
