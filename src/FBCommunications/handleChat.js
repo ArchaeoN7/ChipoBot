@@ -42,7 +42,7 @@ const handleChat = (req, res)=>
 
         }
         else if (message_event.message) {
-			sendTextMessage(sender, "new ChipoBot au rapport! Ta demande est en cours de traitement")
+			sendTextMessage(sender, "new " + config.get("APP_NAME") + " au rapport! Ta demande est en cours de traitement")
             if(message_event.message.quick_reply)
             {
                 if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
@@ -81,7 +81,7 @@ const handleChat = (req, res)=>
                         sendQrCode(name, sender);
                     });
                 }else if(text == "help"){
-                    text = "*MAN chipobot*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
+                    text = "*MAN " + config.get("APP_NAME") + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
                     "-  Pour recevoir un nouveau code, envoie: 𝙅'𝙖𝙞 𝙛𝙖𝙞𝙢, ou passe par le menu à gauche de ta zone de texte\n"+
                     "-  Si tu n'as pas de menu, envoie: ```menu```, il devrait apparaître au bout de quelques instants\n"+
                     "-  Si tu veux enlever ce menu, envoie: ```rmenu```\n" +
@@ -95,7 +95,7 @@ const handleChat = (req, res)=>
                 else
                 {
                     sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200)+"...");
-                    sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?! envoie ```help``` pour le découvrir ;)");
+                    sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?! envoie : ```help``` pour le découvrir ;)");
                 }
             }
         }
