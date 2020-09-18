@@ -42,7 +42,7 @@ const handleChat = (req, res)=>
 
         }
         else if (message_event.message) {
-			sendTextMessage(sender, "ChipoBot au rapport! Ta demande est en cours de traitement")
+			sendTextMessage(sender, "new ChipoBot au rapport! Ta demande est en cours de traitement")
             if(message_event.message.quick_reply)
             {
                 if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
