@@ -20,7 +20,6 @@ const handleChat = (req, res)=>
 	message_events.forEach(message_event => {
 		let sender = message_event.sender.id
 		try {
-			console.log(config.get('APP_NAME'))
 				if(message_event.postback)
 				{
 					if(message_event.postback.payload)
@@ -44,6 +43,7 @@ const handleChat = (req, res)=>
 
 				}
 				else if (message_event.message) {
+					console.log(config.get('APP_NAME'))
 					sendTextMessage(sender, "new " + config.get('APP_NAME') + " au rapport! Ta demande est en cours de traitement")
 					if(message_event.message.quick_reply)
 					{
