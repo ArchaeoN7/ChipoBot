@@ -16,7 +16,8 @@ const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
  */
 const handleChat = (req, res)=>
 {
-		let message_events = req.body.entry[0].messaging
+	let message_events = req.body.entry[0].messaging
+	console.log(config.get('APP_NAME'))
     message_events.forEach(message_event => {
     let sender = message_event.sender.id
         if(message_event.postback)
@@ -42,7 +43,7 @@ const handleChat = (req, res)=>
 
         }
         else if (message_event.message) {
-			sendTextMessage(sender, "new " + config.get("APP_NAME") + " au rapport! Ta demande est en cours de traitement")
+			sendTextMessage(sender, "new " + config.get('APP_NAME') + " au rapport! Ta demande est en cours de traitement")
             if(message_event.message.quick_reply)
             {
                 if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
@@ -81,7 +82,7 @@ const handleChat = (req, res)=>
                         sendQrCode(name, sender);
                     });
                 }else if(text == "help"){
-                    text = "*MAN " + config.get("APP_NAME") + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
+                    text = "*MAN " + config.get('APP_NAME') + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
                     "-  Pour recevoir un nouveau code, envoie: 𝙅'𝙖𝙞 𝙛𝙖𝙞𝙢, ou passe par le menu à gauche de ta zone de texte\n"+
                     "-  Si tu n'as pas de menu, envoie: ```menu```, il devrait apparaître au bout de quelques instants\n"+
                     "-  Si tu veux enlever ce menu, envoie: ```rmenu```\n" +
