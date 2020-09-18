@@ -19,7 +19,7 @@ const retrieveImg = (count, dispInfos, email, goOn)=>{
         else
             goOn(null);
     });
-    
+
 }
 
 function retrieveLink(html){

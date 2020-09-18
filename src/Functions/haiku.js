@@ -63,9 +63,9 @@ const haiku = () => {
 		"ancient",
 		"purple",
 		"lively",
-		"nameless"
-		],
-		nouns = [
+		"nameless",
+	];
+	nouns = [
 		"waterfall",
 		"river",
 		"breeze",
@@ -129,8 +129,8 @@ const haiku = () => {
 		"paper",
 		"frog",
 		"smoke",
-		"star"
-		];
+		"star",
+	];
 	return (
 		adjs[Math.floor(Math.random() * (adjs.length - 1))] +
 		"_" +

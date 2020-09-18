@@ -13,13 +13,13 @@ const registerError = (errorLog)=>{
         if (err){
             console.log(err);
         } else {
-            obj = JSON.parse(data); 
+            obj = JSON.parse(data);
             obj.errors.push({log: errorLog, timestamp:date});
-            json = JSON.stringify(obj); 
+            json = JSON.stringify(obj);
             fs.writeFile(jsonPath, json, 'utf8', function(err) {
-                if(err) 
+                if(err)
                     return console.log(err);
-            }); 
+            });
     }});
 
 }

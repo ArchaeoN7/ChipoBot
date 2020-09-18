@@ -8,7 +8,7 @@ const express = require('express');
 var request = require("request");
 const http = require('http');
 //import our own functions
-const verifyWebhook = require('./FBCommunications/verify-webhook'); 
+const verifyWebhook = require('./FBCommunications/verify-webhook');
 const handleChat = require('./FBCommunications/handleChat');
 const getMail = require('./Functions/tempMailAccess');
 var app = express();
@@ -29,6 +29,10 @@ app.post('/webhook/',  (req, res) => {
 app.get("/", function(req, res) {
   res.render("index");
 });
+
+app.post('/mail/', function(req, res){
+  print(req)
+})
 app.listen(app.get('port'), function() {
   console.log('Bot is running on port ', app.get('port'));
 });

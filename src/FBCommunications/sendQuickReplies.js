@@ -1,10 +1,11 @@
 const config = require('config');
 const request = require('request');
+const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
 const sendQuickReplyMessage = (sender,  title, proposition1, proposition2) => {
-    
-    let data = 
-    { 
+
+    let data =
+    {
         text:title,
         "quick_replies":[
         {
@@ -19,10 +20,9 @@ const sendQuickReplyMessage = (sender,  title, proposition1, proposition2) => {
             }
         ]
     }
-    let access_token = config.get("ACCESS_TOKEN");
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: access_token},
+        qs: {access_token: ACCESS_TOKEN},
         method: 'POST',
         json: {
             recipient: {id:sender},

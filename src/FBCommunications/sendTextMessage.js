@@ -1,12 +1,12 @@
 const config = require('config');
 const request = require('request');
+const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
 const sendTextMessage = (sender, text) => {
     let data = { text:text }
-    let access_token = config.get("ACCESS_TOKEN");
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: access_token},
+        qs: {access_token: ACCESS_TOKEN},
         method: 'POST',
         json: {
             recipient: {id:sender},

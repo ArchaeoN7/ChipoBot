@@ -41,7 +41,7 @@ const getMail = (count, dispInfos, email, useMail) => {
 		}
 		else
 			useMail(null, "Found neither error message or email when contacting temp mail API");
-		
+
 	});
 }
 
@@ -51,7 +51,7 @@ function displayInfos(count, email, stuff) {
 	console.log("hash is: "+md5HashMail(email) + " for email: " + email);
 	console.log(JSON.parse(stuff).error);
 }
-
+// Get availables domain names and return a random one
 const randomDomain = (useRandom) =>{
 
 	var options = {
