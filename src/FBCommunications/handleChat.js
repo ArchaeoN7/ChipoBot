@@ -98,8 +98,9 @@ const handleChat = (req, res)=>
 					}
 				}
 			} catch (error) {
-				errorMessage(sender)
 				console.log(error)
+				console.log("erreur")
+				errorMessage(sender)
 		}
 	});
 }
