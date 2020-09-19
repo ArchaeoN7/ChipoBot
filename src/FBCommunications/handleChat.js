@@ -41,7 +41,7 @@ const handleChat = (req, res)=>
 
 			}
 			else if (message_event.message) {
-				sendTextMessage(sender, "new " + app_name + " au rapport! Ta demande est en cours de traitement")
+				sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")
 				if(message_event.message.quick_reply)
 				{
 					if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
@@ -93,7 +93,7 @@ const handleChat = (req, res)=>
 					else
 					{
 						sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200)+"...");
-						sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?! pour le découvrir, envoie : ```help``` ");
+						sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?!\nPour le découvrir, envoie : ```help``` ");
 					}
 				}
 			}
