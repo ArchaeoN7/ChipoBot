@@ -5,6 +5,7 @@
 
 const haiku = () => {
 	var adjs = [
+		"soft",
 		"autumn",
 		"hidden",
 		"bitter",
@@ -135,6 +136,7 @@ const haiku = () => {
 		"frog",
 		"smoke",
 		"star",
+		"dragon",
 	];
 	return (
 		adjs[Math.floor(Math.random() * (adjs.length - 1))] +

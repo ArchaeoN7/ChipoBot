@@ -11,8 +11,14 @@ const http = require('http');
 const verifyWebhook = require('./FBCommunications/verify-webhook');
 const handleChat = require('./FBCommunications/handleChat');
 const getMail = require('./Functions/tempMailAccess');
+const {sub2chip_gmail} = require('./Functions/sub2chipotle');
+const {retrieveImg} = require('./Functions/getImg')
 var app = express();
-
+sub2chip_gmail((fname, lname, newMail)=>{
+  if(fname) {
+    retrieveImg(newMail)
+  }
+})
 // Set template engine in Express
 app.set("view engine", "ejs");
 

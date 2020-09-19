@@ -2,6 +2,8 @@ const fs = require('fs')
 const readline = require('readline');
 const {google} = require('googleapis');
 const atob = require('atob');
+const config = require('config');
+
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 // The file token.json stores the user's access and refresh tokens, and is
@@ -9,39 +11,43 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-// Load client secrets from a local file.
-fs.readFile('credentials.json', (err, content) => {
-	if (err) return console.log('Error loading client secret file:', err);
-	// Authorize a client with credentials, then call the Gmail API.
-	authorize(JSON.parse(content), findMessages);
-});
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
  * given callback function.
  * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
+ * @param {function} gmailAction The callback to call with the authorized client.
+ * @param {function} callback The function to call after playing with gmail API.
  */
-function authorize(credentials, callback) {
-	const {client_secret, client_id, redirect_uris} = credentials.installed;
+const gmailAccess = (gmailAction, gmailActionargs, callback) => {
+	// Create a new OAuth2 object
+	const client_secret = process.env.CLIENT_SECRET;
+	const client_id = process.env.CLIENT_ID;
+	const redirect_uri = process.env.REDIRECT_URI;
 	const oAuth2Client = new google.auth.OAuth2(
-			client_id, client_secret, redirect_uris[0]);
+			client_id, client_secret, redirect_uri);
 
-	// Check if we have previously stored a token.
-	fs.readFile(TOKEN_PATH, (err, token) => {
-		if (err) return getNewToken(oAuth2Client, callback);
-		oAuth2Client.setCredentials(JSON.parse(token));
-		callback(oAuth2Client);
-	});
+	// Get access token informations
+	access_token = process.env.GMAIL_ACCESS_TOKEN;
+	refresh_token = process.env.GMAIL_REFRESH_TOKEN;
+	scope = process.env.GMAIL_SCOPE;
+	token_type = process.env.GMAIL_TOKEN_TYPE;
+	expiry_date = process.env.GMAIL_EXPIRY_DATE;
+	// Create connection with Gmail
+	creds = {access_token, refresh_token, scope, token_type, expiry_date}
+	oAuth2Client.setCredentials(creds);
+	console.log(process.env.GMAIL_SCOPE)
+	// Execute gmailAction function
+	gmailAction(oAuth2Client, gmailActionargs, callback);
 }
 
 /**
  * Get and store new token after prompting for user authorization, and then
  * execute the given callback with the authorized OAuth2 client.
  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
- * @param {getEventsCallback} callback The callback for the authorized client.
+ * @param {getEventsCallback} gmailAction The callback for the authorized client.
  */
-function getNewToken(oAuth2Client, callback) {
+function getNewToken(oAuth2Client, gmailAction) {
 	const authUrl = oAuth2Client.generateAuthUrl({
 		access_type: 'offline',
 		scope: SCOPES,
@@ -61,7 +67,7 @@ function getNewToken(oAuth2Client, callback) {
 				if (err) return console.error(err);
 				console.log('Token stored to', TOKEN_PATH);
 			});
-			callback(oAuth2Client);
+			gmailAction(oAuth2Client);
 		});
 	});
 }
@@ -89,44 +95,82 @@ function listLabels(auth) {
 	});
 }
 
-function findMessages(auth) {
+const findChipotleMessage = (auth, args, callback) => {
 	var gmail = google.gmail('v1');
+	fpartGmail = config.get("GMAIL_ADDRESS")
+
 	gmail.users.messages.list({
 	auth: auth,
-	userId: 'spirula.shell@gmail.com',
+	userId: fpartGmail+"@gmail.com",
 	maxResults: 10,
 	q:""
 }, function(err, response) {
 		if (err) return console.log('The API returned an error: ' + err);
 		console.log("Status : " + response.status);
-		console.log("maillists : " + JSON.stringify(response.data.messages));
+		console.log("maillists size: " + response.data.resultSizeEstimate);
 		console.log("++++++++++++++++++++++++++");
-		printMessage(response.data,auth); //snippet not available
+		getChipotleMessage(response.data, auth, args, callback);
 	});
 }
-
-function printMessage(messageID,auth) {
-	console.log(messageID.messages[0])
-	var gmail = google.gmail('v1');
-	gmail.users.messages.get({
-	auth: auth,
-	userId: 'spirula.shell@gmail.com',
-	id:messageID.messages[0].id
-},  function(err, response) {
-        //console.log(response.data.payload.parts[0])
-        var part = response.data.payload.parts.filter(function(part) {
-            //console.log(part.mimeType)
-            return part.mimeType == 'text/html';
-        });
-        console.log("here is my part: " + part)
-        console.log( part)
-        var html = atob(part[0].body.data.replace(/-/g, '+').replace(/_/g, '/'));
-        console.log(html);
-        messageID.messages.splice(0,1);
-        if(messageID.length > 0)
-            printMessage(messageID,auth);
-        else {
-            console.log("All Done");
-        }
-    });
+function getHtml(response) {
+	var part = response.data.payload.parts.filter(function(part) {
+		return part.mimeType == 'text/html';
+	});
+	return atob(part[0].body.data.replace(/-/g, '+').replace(/_/g, '/'));
 }
+function hereWeGoAgain(auth, args, callback)
+{
+	console.log("Here we go again, n°"+ (args.count + 1) + " try");
+	args["count"] = args.count + 1
+	findChipotleMessage(auth, args, callback)
+}
+function getChipotleMessage(messageID, auth, args, callback) {
+	if (messageID.messages.length > 0) {
+		chipotleLabelId = config.get("GMAIL_CHIPO_LABEL")
+		fpartGmail = config.get("GMAIL_ADDRESS")
+		senderMail = args.mail
+		var gmail = google.gmail('v1');
+		gmail.users.messages.get({
+		auth: auth,
+		userId: fpartGmail+"@gmail.com",
+		id:messageID.messages[0].id
+		},  function(err, response) {
+				if (response.data.labelIds.indexOf(chipotleLabelId) != -1)
+				{
+					headers = response.data.payload.headers
+					for (header of headers){
+						if (header.name == "Delivered-To")
+							if (header.value == senderMail) {
+								var html = getHtml(response);
+								callback(html);
+								return 0;
+							}
+							else
+								break;
+					}
+				}
+				else
+					console.log(response.data.labelIds)
+				messageID.messages.splice(0,1);
+				if(messageID.messages.length > 0)
+					getChipotleMessage(messageID, auth, args, callback);
+				else {
+					count = args.count
+					if (count < config.get("MAX_COUNT_LOOP"))
+					{
+						hereWeGoAgain(auth, args, callback)
+					}
+					else
+					{
+						console.log("email searching Timed out, counter: " + args.count)
+						callback(null)
+					}
+				}
+			});
+	}
+	else
+		hereWeGoAgain(auth, args, callback)
+}
+
+exports.findChipotleMessage = findChipotleMessage;
+exports.gmailAccess = gmailAccess;

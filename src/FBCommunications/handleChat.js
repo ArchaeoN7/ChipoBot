@@ -5,7 +5,7 @@ const getImg = require('../Functions/getImg');
 const sendPic = require('../FBCommunications/sendPic');
 const config = require('config');
 var request = require("request");
-const sub2chip = require('../Functions/sub2chipotle');
+const {sub2chip} = require('../Functions/sub2chipotle');
 const registerError = require("../Functions/handleErrors");
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 const app_name = config.get('APP_NAME')
@@ -79,7 +79,7 @@ const handleChat = (req, res)=>
 							sendQrCode(name, sender);
 						});
 					}else if(text == "help"){
-						text = "*MAN " + app_name + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'un\n\n"+
+						text = "*MAN " + app_name + "*\n\n*Ce bot te fournit des bons de réduction Chipotle* \n=> 2 burritos pour le prix d'1\n\n"+
 						"Pour recevoir un nouveau code, envoie: \n ```J'ai faim```\n ou passe par le menu à gauche de ta zone de texte\n"+
 						"Si tu n'as pas de menu, envoie:\n"+
 						"```menu```\nIl devrait apparaître au bout de quelques instants\n"+
@@ -111,12 +111,10 @@ const handleChat = (req, res)=>
  * @param {object} sender
  */
 function sendQrCode(name, sender){
-	errorMessage(sender)
-	return
     sub2chip((fname, lname, newMail)=>{
         if(fname)
         {
-            getImg(0, false, newMail, (link)=>{
+            getImg(newMail, (link)=>{
                 if(link!=null)
                 {
                     sendTextMessage(sender, fname + " "+lname+ " s'est enregistré chez Chipotle");
