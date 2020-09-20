@@ -146,6 +146,7 @@ function getChipotleMessage(messageID, auth, args, callback) {
 							if (header.value == senderMail) {
 								var html = getHtml(response);
 								callback(html);
+								moveToTrash(auth, messageID.messages[0].id)
 								return 0;
 							}
 							else
@@ -174,6 +175,20 @@ function getChipotleMessage(messageID, auth, args, callback) {
 	else
 		hereWeGoAgain(auth, args, callback)
 }
-
+const moveToTrash = (auth, messageId) => {
+	if (messageId != null) {
+		var gmail = google.gmail('v1');
+		console.log(messageId)
+		gmail.users.messages.trash({
+		auth: auth,
+		userId: 'spirula.shell@gmail.com',
+		id:messageId
+		},  function(err, response) {
+				if (err)
+					console.log(err)
+				console.log(response.status)
+			});
+	}
+}
 exports.findChipotleMessage = findChipotleMessage;
 exports.gmailAccess = gmailAccess;
