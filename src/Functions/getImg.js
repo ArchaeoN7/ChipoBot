@@ -11,7 +11,7 @@ const config = require('config');
  * @param {callback} callback
  */
 
-exports.retrieveImg = (email, callback) => {
+const retrieveImg = (email, callback) => {
     mailOption = config.get("MAIL_OPTION")
     switch(mailOption) {
         case "gmail":
@@ -73,3 +73,5 @@ function retrieveLink(html){
     else
         return null;
 }
+
+module.exports = retrieveImg;

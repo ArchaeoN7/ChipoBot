@@ -21,15 +21,14 @@ app.get('/webhook', function(req, res) {
 });
 
 app.post('/webhook/',  (req, res) => {
-  handleChat(req, res);
+	handleChat(req, res);
 })
 app.get("/", function(req, res) {
-  res.render("index");
+	res.render("index");
 });
 
-app.post('/mail/', function(req, res){
-  print(req)
-})
-app.listen(app.get('port'), function() {
-  console.log('Bot is running on port ', app.get('port'));
+var server = app.listen(app.get('port'), function() {
+	var host = server.address().address;
+	var port = server.address().port;
+    console.log('running at http://' + host + ':' + port)
 });

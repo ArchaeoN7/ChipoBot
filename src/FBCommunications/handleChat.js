@@ -1,7 +1,7 @@
 const sendTextMessage = require('./sendTextMessage');
 const sendQuickReplies = require('./sendQuickReplies');
 const persMenus = require('./persistentMenus');
-const retrieveImg = require('../Functions/getImg');
+const getImg = require('../Functions/getImg')
 const sendPic = require('../FBCommunications/sendPic');
 const config = require('config');
 var request = require("request");
@@ -114,7 +114,7 @@ function sendQrCode(name, sender){
     sub2chip((fname, lname, newMail)=>{
         if(fname)
         {
-            retrieveImg(newMail, (link)=>{
+            getImg(newMail, (link)=> {
                 if(link!=null)
                 {
                     sendTextMessage(sender, fname + " "+lname+ " s'est enregistré chez Chipotle");

@@ -73,28 +73,11 @@ function getNewToken(oAuth2Client, gmailAction) {
 }
 
 /**
- * Lists the labels in the user's account.
- *
+ * Get list of mail ids and send them to next function
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {object} args Object containing various arguments (count, newmail)
+ * @param {function} callback Callback to call at the end of the execution
  */
-function listLabels(auth) {
-		const gmail = google.gmail({version: 'v1', auth});
-		gmail.users.labels.list({
-			userId: 'me',
-		}, (err, res) => {
-		if (err) return console.log('The API returned an error: ' + err);
-		const labels = res.data.labels;
-		if (labels.length) {
-			console.log('Labels:');
-			labels.forEach((label) => {
-				console.log(`- ${label.name}`);
-			});
-		} else {
-			console.log('No labels found.');
-		}
-	});
-}
-
 const findChipotleMessage = (auth, args, callback) => {
 	var gmail = google.gmail('v1');
 	fpartGmail = config.get("GMAIL_ADDRESS")
@@ -106,24 +89,44 @@ const findChipotleMessage = (auth, args, callback) => {
 	q:""
 }, function(err, response) {
 		if (err) return console.log('The API returned an error: ' + err);
+		/*
 		console.log("Status : " + response.status);
 		console.log("maillists size: " + response.data.resultSizeEstimate);
 		console.log("++++++++++++++++++++++++++");
+		*/
 		getChipotleMessage(response.data, auth, args, callback);
 	});
 }
+/**
+ * Extract Html part of the mail
+ * @param {json} response mail JSON response
+ */
 function getHtml(response) {
 	var part = response.data.payload.parts.filter(function(part) {
 		return part.mimeType == 'text/html';
 	});
 	return atob(part[0].body.data.replace(/-/g, '+').replace(/_/g, '/'));
 }
+/**
+ * Recurssive process while the count < MAX_COUNT
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {object} args Object containing various arguments (count, newmail)
+ * @param {function} callback Callback to call at the end of the execution
+ */
 function hereWeGoAgain(auth, args, callback)
 {
-	console.log("Here we go again, n°"+ (args.count + 1) + " try");
+	if (args.count % 5 == 0)
+		console.log("Here we go again, n°"+ (args.count + 1) + " try");
 	args["count"] = args.count + 1
 	findChipotleMessage(auth, args, callback)
 }
+/**
+ * Recursive function. Get a mail of messageID and check if it is our registration address
+ * @param {array} messageID Array of all mails message Id
+ * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
+ * @param {object} args Object containing various arguments (count, newmail)
+ * @param {function} callback Callback to call at the end of the execution
+ */
 function getChipotleMessage(messageID, auth, args, callback) {
 	if (messageID.messages.length > 0) {
 		chipotleLabelId = config.get("GMAIL_CHIPO_LABEL")
