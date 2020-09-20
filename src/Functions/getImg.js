@@ -47,8 +47,17 @@ const retrieveImg_tmpmail = (email, callback)=> {
 }
 const retrieveImg_gmail = (email, callback)=> {
     gmailAccess(findChipotleMessage, {mail: email, count: 0}, (html)=> {
-        if (html != null)
-            console.log(retrieveLink(html))
+        if (html != null) {
+            const img = retrieveLink(html);
+            if(img)
+                callback(img);
+            else
+                callback(null);
+        }
+        else {
+            registerError(errorLog);
+            callback(null)
+        }
     })
 }
 /**

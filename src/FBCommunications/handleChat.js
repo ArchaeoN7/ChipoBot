@@ -27,7 +27,7 @@ const handleChat = (req, res)=>
 					sendQuickReplies(sender, "Hello jeune affamé ! Que puis-je faire pour toi ?","J'ai faim", "J'ai très faim")
 				else if(message_event.postback.payload == "J'ai faim")
 					{
-						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")
+						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")	
 						const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
 						var options = {
 							method: "GET",
