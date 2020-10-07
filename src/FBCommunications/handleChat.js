@@ -95,7 +95,7 @@ const handleChat = (req, res)=>
 						sendTextMessage(sender, text);
 					}else if(text == "leonardos")
 					{
-						sendTextMessage(sender, "Our system "+ app_name +"is running on *" + config.get('LEONARDOS_VERSION')+ "*")
+						sendTextMessage(sender, "Our system *"+ app_name +"* is running on *" + config.get('LEONARDOS_VERSION')+ "*")
 					}
 					else
 					{
