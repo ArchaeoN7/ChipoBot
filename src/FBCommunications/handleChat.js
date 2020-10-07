@@ -63,8 +63,8 @@ const handleChat = (req, res)=>
 				else if(message_event.message.text)
 				{
 					let text = message_event.message.text
-					console.log(text)
-					text.replace("'", '').replace(' ', '').toLowerCase();
+					message = text
+					text = text.replace("'", '').replace(' ', '').toLowerCase();
 					if(text == "rmenu")
 						persMenus.removePersistentMenu();
 					else if(text == "menu")
@@ -99,7 +99,7 @@ const handleChat = (req, res)=>
 					}
 					else
 					{
-						sendTextMessage(sender, "J'ai recu : " + text.substring(0, 200)+"...");
+						sendTextMessage(sender, "J'ai recu : " + message.substring(0, 200)+"...");
 						sendTextMessage(sender, "Mais qu'est ce que comment que je fonctionne ?!\nPour le découvrir, envoie : ```help``` ");
 					}
 				}
