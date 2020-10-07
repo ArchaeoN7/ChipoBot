@@ -6,6 +6,7 @@ const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 module.exports = {
 
     sendReadNotification(sender) {
+        console.log("on envoie la sauce")
         request({
             url: 'https://graph.facebook.com/v2.6/me/messages',
             qs: {access_token: ACCESS_TOKEN},
