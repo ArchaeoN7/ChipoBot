@@ -28,7 +28,6 @@ const handleChat = (req, res)=>
 					sendQuickReplies(sender, "Hello jeune affamé ! Que puis-je faire pour toi ?","J'ai faim", "J'ai très faim")
 				else if(message_event.postback.payload == "J'ai faim")
 					{
-						sendReadNotification(sender)
 						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")	
 						const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
 						var options = {
@@ -49,7 +48,6 @@ const handleChat = (req, res)=>
 					if(message_event.message.quick_reply.payload == "proposition1" || message_event.message.quick_reply.payload == "proposition2")
 					{
 						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")
-						sendReadNotification(sender)
 						const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
 						var options = {
 							method: "GET",
@@ -75,7 +73,6 @@ const handleChat = (req, res)=>
 					else if(text == "jaifaim")
 					{
 						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")
-						sendReadNotification(sender)
 						const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
 						var options = {
 							method: "GET",
