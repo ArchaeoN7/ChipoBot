@@ -63,6 +63,7 @@ const handleChat = (req, res)=>
 				else if(message_event.message.text)
 				{
 					let text = message_event.message.text
+					console.log(text)
 					text.replace("'", '').replace(' ', '').toLowerCase();
 					if(text == "rmenu")
 						persMenus.removePersistentMenu();
