@@ -1,5 +1,7 @@
 const config = require('config');
 const request = require('request');
+const sendReadNotification = require("../FBCommunications/senderAction")
+
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 
 /**

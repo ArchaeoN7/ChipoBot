@@ -7,7 +7,6 @@ const config = require('config');
 var request = require("request");
 const {sub2chip} = require('../Functions/sub2chipotle');
 const registerError = require("../Functions/handleErrors");
-const {sendReadNotification} = require("../FBCommunications/senderAction")
 const ACCESS_TOKEN = process.env.FB_WEBHOOK_ACCESS_TOKEN
 const app_name = config.get('APP_NAME')
 /**
