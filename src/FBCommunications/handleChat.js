@@ -63,11 +63,12 @@ const handleChat = (req, res)=>
 				else if(message_event.message.text)
 				{
 					let text = message_event.message.text
+					text.replace("'", '').replace(' ', '').toLowerCase();
 					if(text == "rmenu")
 						persMenus.removePersistentMenu();
 					else if(text == "menu")
 						persMenus.addPersistentMenu(sender);
-					else if(text == "J'ai faim")
+					else if(text == "jaifaim")
 					{
 						sendTextMessage(sender,app_name + " au rapport! Ta demande est en cours de traitement")
 						const url = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic&access_token=" + ACCESS_TOKEN;
@@ -91,6 +92,9 @@ const handleChat = (req, res)=>
 						"=> Contacte l'administrateur si tu veux pouvoir en discuter avec lui !"+
 						"\n\n\nAmicalement, l'admin"
 						sendTextMessage(sender, text);
+					}else if(text == "leoardos")
+					{
+						sendTextMessage(sender, "Our system is working thanks to LeonardOS V.22")
 					}
 					else
 					{
