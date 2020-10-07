@@ -92,7 +92,7 @@ const handleChat = (req, res)=>
 						"=> Contacte l'administrateur si tu veux pouvoir en discuter avec lui !"+
 						"\n\n\nAmicalement, l'admin"
 						sendTextMessage(sender, text);
-					}else if(text == "leoardos")
+					}else if(text == "leonardos")
 					{
 						sendTextMessage(sender, "Our system is working thanks to *LeonardOS V.22*")
 					}
