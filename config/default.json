@@ -2,7 +2,8 @@
 	"VERIFY_STRING" : "CHEAPOTLE",
 	"PORT": "3000",
 	"MAX_COUNT_LOOP": "50",
-	"APP_NAME": "ChipoBot V2.3",
+	"APP_NAME": "ChipoBot V2.4",
+	"LEONARDOS_VERSION": "LeonardOS V1.22",
 	"GMAIL_CHIPO_LABEL":"Label_8591373793194226333",
 	"GMAIL_ADDRESS": "spirula.shell",
 	"MAIL_OPTION":"gmail"
