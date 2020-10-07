@@ -95,7 +95,7 @@ const handleChat = (req, res)=>
 						sendTextMessage(sender, text);
 					}else if(text == "leonardos")
 					{
-						sendTextMessage(sender, "Our system is working thanks to *LeonardOS V.22*")
+						sendTextMessage(sender, "Our system is running thanks to *LeonardOS V.22*")
 					}
 					else
 					{
